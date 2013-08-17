@@ -14,6 +14,7 @@
 		4873F60517BFEA47003EF3D8 /* MNPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4873F60417BFEA47003EF3D8 /* MNPreferencesWindowController.m */; };
 		4873F60817BFEB16003EF3D8 /* MNMouseWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4873F60717BFEB16003EF3D8 /* MNMouseWindowController.m */; };
 		4873F60B17BFEB86003EF3D8 /* MNMouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4873F60A17BFEB86003EF3D8 /* MNMouseView.m */; };
+		4873F60E17BFF646003EF3D8 /* MNMouseWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4873F60D17BFF646003EF3D8 /* MNMouseWindow.m */; };
 		48B7378417B93BD9006161C0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B7378317B93BD9006161C0 /* Cocoa.framework */; };
 		48B7378E17B93BD9006161C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B7378C17B93BD9006161C0 /* InfoPlist.strings */; };
 		48B7379017B93BD9006161C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B7378F17B93BD9006161C0 /* main.m */; };
@@ -35,6 +36,8 @@
 		4873F60717BFEB16003EF3D8 /* MNMouseWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMouseWindowController.m; sourceTree = "<group>"; };
 		4873F60917BFEB86003EF3D8 /* MNMouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMouseView.h; sourceTree = "<group>"; };
 		4873F60A17BFEB86003EF3D8 /* MNMouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMouseView.m; sourceTree = "<group>"; };
+		4873F60C17BFF646003EF3D8 /* MNMouseWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMouseWindow.h; sourceTree = "<group>"; };
+		4873F60D17BFF646003EF3D8 /* MNMouseWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMouseWindow.m; sourceTree = "<group>"; };
 		48B7378017B93BD9006161C0 /* Mouse Ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mouse Ninja.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B7378317B93BD9006161C0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		48B7378617B93BD9006161C0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -119,6 +122,8 @@
 				4873F60417BFEA47003EF3D8 /* MNPreferencesWindowController.m */,
 				4873F60617BFEB16003EF3D8 /* MNMouseWindowController.h */,
 				4873F60717BFEB16003EF3D8 /* MNMouseWindowController.m */,
+				4873F60C17BFF646003EF3D8 /* MNMouseWindow.h */,
+				4873F60D17BFF646003EF3D8 /* MNMouseWindow.m */,
 				4873F60917BFEB86003EF3D8 /* MNMouseView.h */,
 				4873F60A17BFEB86003EF3D8 /* MNMouseView.m */,
 				48B7378A17B93BD9006161C0 /* Supporting Files */,
@@ -215,6 +220,7 @@
 				4873F60517BFEA47003EF3D8 /* MNPreferencesWindowController.m in Sources */,
 				4873F60817BFEB16003EF3D8 /* MNMouseWindowController.m in Sources */,
 				4873F60B17BFEB86003EF3D8 /* MNMouseView.m in Sources */,
+				4873F60E17BFF646003EF3D8 /* MNMouseWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

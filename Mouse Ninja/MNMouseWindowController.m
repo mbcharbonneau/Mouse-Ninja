@@ -7,6 +7,7 @@
 //
 
 #import "MNMouseWindowController.h"
+#import "MNMouseWindow.h"
 #import "MNMouseView.h"
 
 @interface MNMouseWindowController ()
@@ -29,12 +30,13 @@
 - (id)init;
 {
     NSRect frame = [[NSScreen mainScreen] frame];
-    NSWindow *mouseWindow = [[NSWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
+    MNMouseWindow *mouseWindow = [[MNMouseWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
     MNMouseView *mouseView = [[MNMouseView alloc] initWithFrame:frame];
 
     [mouseWindow setBackgroundColor:[NSColor clearColor]];
     [mouseWindow setOpaque:NO];
     [mouseWindow setContentView:mouseView];
+    [mouseWindow setInitialFirstResponder:mouseView];
     [mouseWindow setLevel:kCGAssistiveTechHighWindowLevelKey];
 
     return [self initWithWindow:mouseWindow];

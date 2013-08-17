@@ -29,6 +29,18 @@
 
     [self.color set];
     [self.path fill];
+
+    
+}
+
+- (void)keyDown:(NSEvent *)theEvent
+{
+    NSLog( @"HERE" );
+}
+
+- (BOOL)acceptsFirstResponder;
+{
+    return YES;
 }
 
 - (BOOL)isOpaque;
