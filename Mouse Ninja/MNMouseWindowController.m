@@ -12,6 +12,8 @@
 
 @interface MNMouseWindowController ()
 
+@property (nonatomic, assign) NSRect centerRect;
+
 @end
 
 @implementation MNMouseWindowController
@@ -27,6 +29,13 @@
     });
 
     return sharedController;
+}
+
+- (void)showWindow:(id)sender;
+{
+    self.centerRect = [self.window frame];
+    [super showWindow:sender];
+    [self.window.contentView setNeedsDisplay:YES];
 }
 
 #pragma mark NSObject
@@ -50,13 +59,46 @@
 
 #pragma mark MNMouseViewDelegate
 
-- (void)mouseView:(MNMouseView *)view sliceDirection:(MNDirection)direction;
+- (void)mouseView:(MNMouseView *)view removeDirection:(MNDirection)direction;
 {
+    CGFloat x = CGRectGetMinX( self.centerRect );
+    CGFloat y = CGRectGetMinY( self.centerRect );
+    CGFloat width = CGRectGetWidth( self.centerRect );
+    CGFloat height = CGRectGetHeight( self.centerRect );
     
+    switch ( direction )
+    {
+        case MNDirectionUp:
+            height -= CGRectGetMidY( self.centerRect )  - CGRectGetMinY( self.centerRect );
+            break;
+        case MNDirectionDown:
+            y += CGRectGetMidY( self.centerRect ) - CGRectGetMinY( self.centerRect );
+            height -= CGRectGetHeight( self.centerRect ) / 2.0f;
+            break;
+        case MNDirectionRight:
+            width -= CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
+            break;
+        case MNDirectionLeft:
+            x += CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
+            width -= CGRectGetWidth( self.centerRect ) / 2.0f;
+            break;
+    }
+
+    self.centerRect = NSMakeRect( x, y, width, height );
+
+    NSBezierPath *path = [[NSBezierPath alloc] init];
+
+    [path appendBezierPathWithRect:NSMakeRect( 0.0f, 0.0f, CGRectGetMinX( self.centerRect ), CGRectGetHeight( view.frame ) )];
+    [path appendBezierPathWithRect:NSMakeRect( CGRectGetMaxX( self.centerRect ), 0.0f, CGRectGetMaxX( view.frame ), CGRectGetHeight( view.frame ) )];
+    [path appendBezierPathWithRect:NSMakeRect( 0.0f, 0.0f, CGRectGetWidth( view.frame ), CGRectGetMinY( self.centerRect ) )];
+    [path appendBezierPathWithRect:NSMakeRect( 0.0f, CGRectGetMaxY( self.centerRect ), CGRectGetWidth( view.frame ), CGRectGetMaxY( view.frame ) )];
+
+    view.path = path;
 }
 
 - (void)mouseViewShouldCancel:(MNMouseView *)view;
 {
+    view.path = nil;
     [self close];
 }
 

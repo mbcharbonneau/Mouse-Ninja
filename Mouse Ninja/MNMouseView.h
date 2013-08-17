@@ -29,7 +29,7 @@ typedef NS_ENUM( NSUInteger, MNDirection )
 @protocol MNMouseViewDelegate <NSObject>
 
 @required
-- (void)mouseView:(MNMouseView *)view sliceDirection:(MNDirection)direction;
+- (void)mouseView:(MNMouseView *)view removeDirection:(MNDirection)direction;
 - (void)mouseViewShouldCancel:(MNMouseView *)view;
 
 @end

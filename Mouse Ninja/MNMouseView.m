@@ -18,6 +18,9 @@
     {
         _color = [NSColor colorWithCalibratedWhite:0.1f alpha:0.7f];
         _path = [[NSBezierPath alloc] init];
+
+        [self addObserver:self forKeyPath:@"path" options:0 context:NULL];
+        [self addObserver:self forKeyPath:@"color" options:0 context:NULL];
     }
     
     return self;
@@ -26,8 +29,6 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     NSAssert( self.color != nil, @"cannot draw with nil color" );
-
-    //self.path = [NSBezierPath bezierPathWithRect:self.bounds];
 
     CGFloat strokeWidth = 4.0f;
     NSBezierPath *stroke = [NSBezierPath bezierPathWithRect:NSInsetRect( self.bounds, strokeWidth / 2.0f, strokeWidth / 2.0f )];
@@ -55,16 +56,16 @@
             [self.delegate mouseViewShouldCancel:self];
             break;
         case 123:
-            [self.delegate mouseView:self sliceDirection:MNDirectionLeft];
+            [self.delegate mouseView:self removeDirection:MNDirectionRight];
             break;
         case 126:
-            [self.delegate mouseView:self sliceDirection:MNDirectionUp];
+            [self.delegate mouseView:self removeDirection:MNDirectionDown];
             break;
         case 124:
-            [self.delegate mouseView:self sliceDirection:MNDirectionRight];
+            [self.delegate mouseView:self removeDirection:MNDirectionLeft];
             break;
         case 125:
-            [self.delegate mouseView:self sliceDirection:MNDirectionDown];
+            [self.delegate mouseView:self removeDirection:MNDirectionUp];
             break;
         default:
             [super keyDown:theEvent];
@@ -75,6 +76,19 @@
 - (BOOL)acceptsFirstResponder;
 {
     return YES;
+}
+
+#pragma mark NSObject
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+{
+    [self setNeedsDisplay:YES];
+}
+
+- (void)dealloc;
+{
+    [self removeObserver:self forKeyPath:@"path"];
+    [self removeObserver:self forKeyPath:@"color"];
 }
 
 @end
