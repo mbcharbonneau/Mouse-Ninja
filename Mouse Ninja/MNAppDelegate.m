@@ -9,6 +9,7 @@
 #import "MNAppDelegate.h"
 #import "MNWelcomeWindowController.h"
 #import "MNConstants.h"
+#import "MNPreferencesWindowController.h"
 
 @interface MNAppDelegate()
 
@@ -36,6 +37,9 @@
         self.welcomeWindowController = [[MNWelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
         [self.welcomeWindowController showWindow:self];
     }
+
+    [[MNPreferencesWindowController sharedPreferencesController] showWindow:self];
+    
 }
 
 @end
