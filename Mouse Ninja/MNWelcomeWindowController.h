@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface MNWelcomeWindowController : NSWindowController
+@interface MNWelcomeWindowController : NSWindowController <NSWindowDelegate>
 
 - (IBAction)openPreferences:(id)sender;
 - (IBAction)learnMore:(id)sender;

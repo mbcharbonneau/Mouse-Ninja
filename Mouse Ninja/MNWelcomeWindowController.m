@@ -7,6 +7,7 @@
 //
 
 #import "MNWelcomeWindowController.h"
+#import "MNConstants.h"
 
 @interface MNWelcomeWindowController ()
 
@@ -19,13 +20,30 @@
 - (IBAction)openPreferences:(id)sender;
 {
 #warning stub
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:MNHasSeenWelcomeWindowDefaultsKey];
+
 }
 
 - (IBAction)learnMore:(id)sender;
 {
 #warning stub
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:MNHasSeenWelcomeWindowDefaultsKey];
+
 }
 
+#pragma mark NSWindowDelegate
+
+- (BOOL)windowShouldClose:(id)sender;
+{
+    // Don't use -windowWillClose, we only want to observe when the user
+    // explicitly closes the window (not if they quit).
+
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:MNHasSeenWelcomeWindowDefaultsKey];
+    
+    return YES;
+}
 
 
 - (id)initWithWindow:(NSWindow *)window

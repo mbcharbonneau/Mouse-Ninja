@@ -51,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4873F60017BFE93D003EF3D8 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				48B7379817B93BDA006161C0 /* MainMenu.xib */,
+				4873F5FB17BFE1A6003EF3D8 /* WelcomeWindow.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
 		48B7377717B93BD9006161C0 = {
 			isa = PBXGroup;
 			children = (
@@ -92,13 +101,9 @@
 			children = (
 				48B7379517B93BD9006161C0 /* MNAppDelegate.h */,
 				48B7379617B93BD9006161C0 /* MNAppDelegate.m */,
-				48B7379817B93BDA006161C0 /* MainMenu.xib */,
-				48B7378A17B93BD9006161C0 /* Supporting Files */,
 				4873F5F817BFE189003EF3D8 /* MNWelcomeWindowController.h */,
 				4873F5F917BFE189003EF3D8 /* MNWelcomeWindowController.m */,
-				4873F5FB17BFE1A6003EF3D8 /* WelcomeWindow.xib */,
-				4873F5FD17BFE4FD003EF3D8 /* MNConstants.h */,
-				4873F5FE17BFE4FD003EF3D8 /* MNConstants.m */,
+				48B7378A17B93BD9006161C0 /* Supporting Files */,
 			);
 			path = "Mouse Ninja";
 			sourceTree = "<group>";
@@ -106,9 +111,12 @@
 		48B7378A17B93BD9006161C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4873F60017BFE93D003EF3D8 /* XIBs */,
 				48B7378B17B93BD9006161C0 /* Mouse Ninja-Info.plist */,
 				48B7378C17B93BD9006161C0 /* InfoPlist.strings */,
 				48B7378F17B93BD9006161C0 /* main.m */,
+				4873F5FD17BFE4FD003EF3D8 /* MNConstants.h */,
+				4873F5FE17BFE4FD003EF3D8 /* MNConstants.m */,
 				48B7379117B93BD9006161C0 /* Mouse Ninja-Prefix.pch */,
 				48B7379217B93BD9006161C0 /* Credits.rtf */,
 			);

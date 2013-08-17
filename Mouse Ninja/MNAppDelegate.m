@@ -18,21 +18,24 @@
 
 @implementation MNAppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    if ( ![[NSUserDefaults standardUserDefaults] boolForKey:MNHasSeenWelcomeWindowDefaultsKey] )
-    {
-        self.welcomeWindowController = [[MNWelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
-        [self.welcomeWindowController showWindow:self];
-        [self.welcomeWindowController.window makeKeyAndOrderFront:self];
-    }
-}
+#pragma mark NSObject
 
 + (void)initialize;
 {
     NSDictionary *defaults = @{ MNHasSeenWelcomeWindowDefaultsKey : @(NO) };
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+}
+
+#pragma mark NSApplicationDelegate
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    if ( ![[NSUserDefaults standardUserDefaults] boolForKey:MNHasSeenWelcomeWindowDefaultsKey] )
+    {
+        self.welcomeWindowController = [[MNWelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
+        [self.welcomeWindowController showWindow:self];
+    }
 }
 
 @end
