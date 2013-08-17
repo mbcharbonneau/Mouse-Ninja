@@ -11,5 +11,6 @@
 @interface MNMouseView : NSView
 
 @property (nonatomic, strong) NSColor *color;
+@property (nonatomic, strong) NSBezierPath *path;
 
 @end

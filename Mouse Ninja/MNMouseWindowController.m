@@ -32,6 +32,8 @@
     NSWindow *mouseWindow = [[NSWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
     MNMouseView *mouseView = [[MNMouseView alloc] initWithFrame:frame];
 
+    [mouseWindow setBackgroundColor:[NSColor clearColor]];
+    [mouseWindow setOpaque:NO];
     [mouseWindow setContentView:mouseView];
     [mouseWindow setLevel:kCGAssistiveTechHighWindowLevelKey];
 

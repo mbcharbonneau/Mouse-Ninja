@@ -15,6 +15,7 @@
     if ( self = [super initWithFrame:frame] )
     {
         _color = [NSColor colorWithCalibratedWhite:0.1f alpha:0.7f];
+        _path = [[NSBezierPath alloc] init];
     }
     
     return self;
@@ -23,9 +24,16 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
     NSAssert( self.color != nil, @"cannot draw with nil color" );
-    
+
+    self.path = [NSBezierPath bezierPathWithRect:self.bounds];
+
     [self.color set];
-    NSRectFill( dirtyRect );
+    [self.path fill];
+}
+
+- (BOOL)isOpaque;
+{
+    return NO;
 }
 
 @end
