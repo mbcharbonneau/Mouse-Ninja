@@ -12,4 +12,6 @@
 
 + (instancetype)sharedPreferencesController;
 
+- (IBAction)showMouseWindow:(id)sender;
+
 @end

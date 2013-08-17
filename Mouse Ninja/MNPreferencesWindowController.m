@@ -7,12 +7,15 @@
 //
 
 #import "MNPreferencesWindowController.h"
+#import "MNMouseWindowController.h"
 
 @interface MNPreferencesWindowController ()
 
 @end
 
 @implementation MNPreferencesWindowController
+
+#pragma mark MNPreferencesWindowController
 
 + (instancetype)sharedPreferencesController;
 {
@@ -23,6 +26,11 @@
     });
 
     return sharedController;
+}
+
+- (IBAction)showMouseWindow:(id)sender;
+{
+    [[MNMouseWindowController sharedMouseWindowController] showWindow:sender];
 }
 
 

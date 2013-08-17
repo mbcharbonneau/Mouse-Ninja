@@ -7,6 +7,7 @@
 //
 
 #import "MNMouseWindowController.h"
+#import "MNMouseView.h"
 
 @interface MNMouseWindowController ()
 
@@ -25,22 +26,16 @@
     return sharedController;
 }
 
-
-- (id)initWithWindow:(NSWindow *)window
+- (id)init;
 {
-    self = [super initWithWindow:window];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
+    NSRect frame = [[NSScreen mainScreen] frame];
+    NSWindow *mouseWindow = [[NSWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
+    MNMouseView *mouseView = [[MNMouseView alloc] initWithFrame:frame];
 
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    [mouseWindow setContentView:mouseView];
+    [mouseWindow setLevel:kCGAssistiveTechHighWindowLevelKey];
+
+    return [self initWithWindow:mouseWindow];
 }
 
 @end
