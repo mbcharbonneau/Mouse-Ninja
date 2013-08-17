@@ -10,6 +10,8 @@
 		4873F5FA17BFE189003EF3D8 /* MNWelcomeWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4873F5F917BFE189003EF3D8 /* MNWelcomeWindowController.m */; };
 		4873F5FC17BFE1A6003EF3D8 /* WelcomeWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4873F5FB17BFE1A6003EF3D8 /* WelcomeWindow.xib */; };
 		4873F5FF17BFE4FD003EF3D8 /* MNConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4873F5FE17BFE4FD003EF3D8 /* MNConstants.m */; };
+		4873F60217BFEA33003EF3D8 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4873F60117BFEA33003EF3D8 /* Preferences.xib */; };
+		4873F60517BFEA47003EF3D8 /* MNPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4873F60417BFEA47003EF3D8 /* MNPreferencesWindowController.m */; };
 		48B7378417B93BD9006161C0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48B7378317B93BD9006161C0 /* Cocoa.framework */; };
 		48B7378E17B93BD9006161C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 48B7378C17B93BD9006161C0 /* InfoPlist.strings */; };
 		48B7379017B93BD9006161C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B7378F17B93BD9006161C0 /* main.m */; };
@@ -24,6 +26,9 @@
 		4873F5FB17BFE1A6003EF3D8 /* WelcomeWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomeWindow.xib; sourceTree = "<group>"; };
 		4873F5FD17BFE4FD003EF3D8 /* MNConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNConstants.h; sourceTree = "<group>"; };
 		4873F5FE17BFE4FD003EF3D8 /* MNConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNConstants.m; sourceTree = "<group>"; };
+		4873F60117BFEA33003EF3D8 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		4873F60317BFEA47003EF3D8 /* MNPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNPreferencesWindowController.h; sourceTree = "<group>"; };
+		4873F60417BFEA47003EF3D8 /* MNPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNPreferencesWindowController.m; sourceTree = "<group>"; };
 		48B7378017B93BD9006161C0 /* Mouse Ninja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mouse Ninja.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B7378317B93BD9006161C0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		48B7378617B93BD9006161C0 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -56,6 +61,7 @@
 			children = (
 				48B7379817B93BDA006161C0 /* MainMenu.xib */,
 				4873F5FB17BFE1A6003EF3D8 /* WelcomeWindow.xib */,
+				4873F60117BFEA33003EF3D8 /* Preferences.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -103,6 +109,8 @@
 				48B7379617B93BD9006161C0 /* MNAppDelegate.m */,
 				4873F5F817BFE189003EF3D8 /* MNWelcomeWindowController.h */,
 				4873F5F917BFE189003EF3D8 /* MNWelcomeWindowController.m */,
+				4873F60317BFEA47003EF3D8 /* MNPreferencesWindowController.h */,
+				4873F60417BFEA47003EF3D8 /* MNPreferencesWindowController.m */,
 				48B7378A17B93BD9006161C0 /* Supporting Files */,
 			);
 			path = "Mouse Ninja";
@@ -179,6 +187,7 @@
 				48B7379417B93BD9006161C0 /* Credits.rtf in Resources */,
 				48B7379A17B93BDA006161C0 /* MainMenu.xib in Resources */,
 				4873F5FC17BFE1A6003EF3D8 /* WelcomeWindow.xib in Resources */,
+				4873F60217BFEA33003EF3D8 /* Preferences.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +202,7 @@
 				48B7379717B93BD9006161C0 /* MNAppDelegate.m in Sources */,
 				4873F5FA17BFE189003EF3D8 /* MNWelcomeWindowController.m in Sources */,
 				4873F5FF17BFE4FD003EF3D8 /* MNConstants.m in Sources */,
+				4873F60517BFEA47003EF3D8 /* MNPreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
