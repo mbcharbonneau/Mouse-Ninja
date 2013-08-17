@@ -10,4 +10,7 @@
 
 @interface MNWelcomeWindowController : NSWindowController
 
+- (IBAction)openPreferences:(id)sender;
+- (IBAction)learnMore:(id)sender;
+
 @end

@@ -14,6 +14,20 @@
 
 @implementation MNWelcomeWindowController
 
+#pragma mark MNWelcomeWindowController
+
+- (IBAction)openPreferences:(id)sender;
+{
+#warning stub
+}
+
+- (IBAction)learnMore:(id)sender;
+{
+#warning stub
+}
+
+
+
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];

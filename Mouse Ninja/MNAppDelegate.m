@@ -7,12 +7,32 @@
 //
 
 #import "MNAppDelegate.h"
+#import "MNWelcomeWindowController.h"
+#import "MNConstants.h"
+
+@interface MNAppDelegate()
+
+@property (nonatomic, strong) NSWindowController *welcomeWindowController;
+
+@end
 
 @implementation MNAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    if ( ![[NSUserDefaults standardUserDefaults] boolForKey:MNHasSeenWelcomeWindowDefaultsKey] )
+    {
+        self.welcomeWindowController = [[MNWelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
+        [self.welcomeWindowController showWindow:self];
+        [self.welcomeWindowController.window makeKeyAndOrderFront:self];
+    }
+}
+
++ (void)initialize;
+{
+    NSDictionary *defaults = @{ MNHasSeenWelcomeWindowDefaultsKey : @(NO) };
+
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
 
 @end
