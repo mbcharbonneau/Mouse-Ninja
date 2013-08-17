@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MNMouseView.h"
 
-@interface MNMouseWindowController : NSWindowController
+@interface MNMouseWindowController : NSWindowController <MNMouseViewDelegate>
 
 + (instancetype)sharedMouseWindowController;
 

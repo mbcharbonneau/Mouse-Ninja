@@ -8,9 +8,28 @@
 
 #import <Cocoa/Cocoa.h>
 
+typedef NS_ENUM( NSUInteger, MNDirection )
+{
+    MNDirectionLeft,
+    MNDirectionRight,
+    MNDirectionUp,
+    MNDirectionDown
+};
+
+@protocol MNMouseViewDelegate;
+
 @interface MNMouseView : NSView
 
 @property (nonatomic, strong) NSColor *color;
 @property (nonatomic, strong) NSBezierPath *path;
+@property (nonatomic, weak) id<MNMouseViewDelegate> delegate;
+
+@end
+
+@protocol MNMouseViewDelegate <NSObject>
+
+@required
+- (void)mouseView:(MNMouseView *)view sliceDirection:(MNDirection)direction;
+- (void)mouseViewShouldCancel:(MNMouseView *)view;
 
 @end

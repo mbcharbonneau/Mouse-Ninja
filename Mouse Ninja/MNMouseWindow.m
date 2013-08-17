@@ -10,6 +10,8 @@
 
 @implementation MNMouseWindow
 
+#pragma mark NSWindow
+
 - (BOOL)canBecomeKeyWindow;
 {
     return YES;
