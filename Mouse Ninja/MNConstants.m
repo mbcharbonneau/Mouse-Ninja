@@ -9,3 +9,4 @@
 #import "MNConstants.h"
 
 NSString *MNHasSeenWelcomeWindowDefaultsKey = @"MNHasSeenWelcomeWindowDefaultsKey";
+NSString *MNGlobalHotkeyIdentifier = @"MNGlobalHotkeyIdentifier";

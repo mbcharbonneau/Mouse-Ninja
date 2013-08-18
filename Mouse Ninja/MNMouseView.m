@@ -12,7 +12,7 @@
 
 #pragma mark NSView
 
-- (id)initWithFrame:(NSRect)frame
+- (id)initWithFrame:(NSRect)frame;
 {
     if ( self = [super initWithFrame:frame] )
     {
@@ -26,7 +26,7 @@
     return self;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
+- (void)drawRect:(NSRect)dirtyRect;
 {
     NSAssert( self.color != nil, @"cannot draw with nil color" );
 
@@ -48,7 +48,7 @@
 
 #pragma mark NSResponder
 
-- (void)keyDown:(NSEvent *)theEvent
+- (void)keyDown:(NSEvent *)theEvent;
 {
     switch ( [theEvent keyCode] )
     {

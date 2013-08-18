@@ -7,11 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <ShortcutRecorder.h>
+#import <PTHotKey/PTHotKeyCenter.h>
 
-@interface MNPreferencesWindowController : NSWindowController
+@interface MNPreferencesWindowController : NSWindowController <SRRecorderControlDelegate>
 
 + (instancetype)sharedPreferencesController;
-
-- (IBAction)showMouseWindow:(id)sender;
 
 @end

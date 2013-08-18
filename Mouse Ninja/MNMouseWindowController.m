@@ -37,7 +37,7 @@
 {
     self.centerRect = [self.window frame];
     [super showWindow:sender];
-    [self.window.contentView setNeedsDisplay:YES];
+    [NSApp activateIgnoringOtherApps:YES];
     CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, [self centerPoint], kCGMouseButtonLeft );
     CGEventPost( kCGHIDEventTap, move );
     CFRelease( move );

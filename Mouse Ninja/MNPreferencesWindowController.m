@@ -8,7 +8,8 @@
 
 #import "MNPreferencesWindowController.h"
 #import "MNMouseWindowController.h"
-#import "ShortcutRecorder.h"
+#import "MNConstants.h"
+#import "PTHotKey+ShortcutRecorder.h"
 
 @interface MNPreferencesWindowController ()
 
@@ -29,34 +30,30 @@
     return sharedController;
 }
 
-- (IBAction)showMouseWindow:(id)sender;
-{
-    [[MNMouseWindowController sharedMouseWindowController] showWindow:sender];
-}
-
-
-- (id)initWithWindow:(NSWindow *)window
-{
-    self = [super initWithWindow:window];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
-}
-
-- (void)windowDidLoad
-{
-    [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
-}
-
 #pragma mark SRRecorderControlDelegate
+
+- (BOOL)shortcutRecorderShouldBeginRecording:(SRRecorderControl *)aRecorder;
+{
+    [[PTHotKeyCenter sharedCenter] pause];
+    return YES;
+}
 
 - (void)shortcutRecorderDidEndRecording:(SRRecorderControl *)aRecorder;
 {
-    NSLog( @"HERE" );
+    PTHotKeyCenter *center = [PTHotKeyCenter sharedCenter];
+    PTHotKey *oldHotKey = [center hotKeyWithIdentifier:MNGlobalHotkeyIdentifier];
+    [center unregisterHotKey:oldHotKey];
+
+    NSDictionary *keyInfo = [aRecorder objectValue];
+
+    if ( keyInfo != nil )
+    {
+        MNMouseWindowController *target = [MNMouseWindowController sharedMouseWindowController];
+        PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:MNGlobalHotkeyIdentifier keyCombo:keyInfo target:target action:@selector(showWindow:)];
+        [center registerHotKey:newHotKey];
+    }
+
+    [center resume];
 }
 
 @end

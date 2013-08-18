@@ -53,7 +53,7 @@
 		48B7379517B93BD9006161C0 /* MNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNAppDelegate.h; sourceTree = "<group>"; };
 		48B7379617B93BD9006161C0 /* MNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNAppDelegate.m; sourceTree = "<group>"; };
 		48B7379917B93BDA006161C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		48EEA55017C0602D001F9C70 /* PTHotKey.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = PTHotKey.framework; path = ShortcutRecorder/build/Release/PTHotKey.framework; sourceTree = "<group>"; };
+		48EEA55017C0602D001F9C70 /* PTHotKey.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PTHotKey.framework; path = ShortcutRecorder/build/Release/PTHotKey.framework; sourceTree = "<group>"; };
 		48EEA55117C0602D001F9C70 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShortcutRecorder.framework; path = "../../Library/Developer/Xcode/DerivedData/Mouse_Ninja-hjfsfytkcqgsozghecbtdxdcacso/Build/Products/Debug/ShortcutRecorder.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +71,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		480E176217C12837009CD4C2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4873F60C17BFF646003EF3D8 /* MNMouseWindow.h */,
+				4873F60D17BFF646003EF3D8 /* MNMouseWindow.m */,
+				4873F60917BFEB86003EF3D8 /* MNMouseView.h */,
+				4873F60A17BFEB86003EF3D8 /* MNMouseView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		480E176317C12840009CD4C2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				48B7379517B93BD9006161C0 /* MNAppDelegate.h */,
+				48B7379617B93BD9006161C0 /* MNAppDelegate.m */,
+				4873F5F817BFE189003EF3D8 /* MNWelcomeWindowController.h */,
+				4873F5F917BFE189003EF3D8 /* MNWelcomeWindowController.m */,
+				4873F60317BFEA47003EF3D8 /* MNPreferencesWindowController.h */,
+				4873F60417BFEA47003EF3D8 /* MNPreferencesWindowController.m */,
+				4873F60617BFEB16003EF3D8 /* MNMouseWindowController.h */,
+				4873F60717BFEB16003EF3D8 /* MNMouseWindowController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		4873F60017BFE93D003EF3D8 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,18 +148,8 @@
 		48B7378917B93BD9006161C0 /* Mouse Ninja */ = {
 			isa = PBXGroup;
 			children = (
-				48B7379517B93BD9006161C0 /* MNAppDelegate.h */,
-				48B7379617B93BD9006161C0 /* MNAppDelegate.m */,
-				4873F5F817BFE189003EF3D8 /* MNWelcomeWindowController.h */,
-				4873F5F917BFE189003EF3D8 /* MNWelcomeWindowController.m */,
-				4873F60317BFEA47003EF3D8 /* MNPreferencesWindowController.h */,
-				4873F60417BFEA47003EF3D8 /* MNPreferencesWindowController.m */,
-				4873F60617BFEB16003EF3D8 /* MNMouseWindowController.h */,
-				4873F60717BFEB16003EF3D8 /* MNMouseWindowController.m */,
-				4873F60C17BFF646003EF3D8 /* MNMouseWindow.h */,
-				4873F60D17BFF646003EF3D8 /* MNMouseWindow.m */,
-				4873F60917BFEB86003EF3D8 /* MNMouseView.h */,
-				4873F60A17BFEB86003EF3D8 /* MNMouseView.m */,
+				480E176317C12840009CD4C2 /* Controllers */,
+				480E176217C12837009CD4C2 /* View */,
 				48B7378A17B93BD9006161C0 /* Supporting Files */,
 			);
 			path = "Mouse Ninja";
