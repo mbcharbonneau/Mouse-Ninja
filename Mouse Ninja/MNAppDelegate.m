@@ -25,7 +25,8 @@
 
 + (void)initialize;
 {
-    NSDictionary *defaults = @{ MNHasSeenWelcomeWindowDefaultsKey : @(NO) };
+    NSDictionary *hotkey = @{ @"characters" : @"/", @"charactersIgnoringModifiers" : @"/", @"keyCode" : @(44), @"modifierFlags" : @(786432) };
+    NSDictionary *defaults = @{ MNHasSeenWelcomeWindowDefaultsKey : @(NO), MNGlobalHotkeyInfoDefaultsKey : hotkey };
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
