@@ -13,6 +13,7 @@
 @interface MNMouseWindowController ()
 
 @property (nonatomic, assign) NSRect centerRect;
+@property (nonatomic, assign) NSPoint oldMouseLocation;
 
 - (NSPoint)centerPoint;
 
@@ -35,6 +36,7 @@
 
 - (void)showWindow:(id)sender;
 {
+    self.oldMouseLocation = [NSEvent mouseLocation];
     self.centerRect = [self.window frame];
     [super showWindow:sender];
     [NSApp activateIgnoringOtherApps:YES];
@@ -136,6 +138,11 @@
 
 - (void)mouseViewShouldCancel:(MNMouseView *)view;
 {
+    CGPoint location = CGPointMake( self.oldMouseLocation.x, CGRectGetHeight( self.window.frame ) - self.oldMouseLocation.y );
+    CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, location, kCGMouseButtonLeft );
+    CGEventPost( kCGHIDEventTap, move );
+    CFRelease( move );
+
     view.path = nil;
     [self close];
 }

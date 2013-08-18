@@ -54,7 +54,6 @@
     }
 
     [[MNPreferencesWindowController sharedPreferencesController] showWindow:self];
-    
 }
 
 @end
