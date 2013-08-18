@@ -21,6 +21,8 @@
 		48B7379417B93BD9006161C0 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 48B7379217B93BD9006161C0 /* Credits.rtf */; };
 		48B7379717B93BD9006161C0 /* MNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 48B7379617B93BD9006161C0 /* MNAppDelegate.m */; };
 		48B7379A17B93BDA006161C0 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48B7379817B93BDA006161C0 /* MainMenu.xib */; };
+		48EEA55217C0602D001F9C70 /* PTHotKey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EEA55017C0602D001F9C70 /* PTHotKey.framework */; };
+		48EEA55317C0602D001F9C70 /* ShortcutRecorder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EEA55117C0602D001F9C70 /* ShortcutRecorder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		48B7379517B93BD9006161C0 /* MNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNAppDelegate.h; sourceTree = "<group>"; };
 		48B7379617B93BD9006161C0 /* MNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNAppDelegate.m; sourceTree = "<group>"; };
 		48B7379917B93BDA006161C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		48EEA55017C0602D001F9C70 /* PTHotKey.framework */ = {isa = PBXFileReference; lastKnownFileType = file; name = PTHotKey.framework; path = ShortcutRecorder/build/Release/PTHotKey.framework; sourceTree = "<group>"; };
+		48EEA55117C0602D001F9C70 /* ShortcutRecorder.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShortcutRecorder.framework; path = "../../Library/Developer/Xcode/DerivedData/Mouse_Ninja-hjfsfytkcqgsozghecbtdxdcacso/Build/Products/Debug/ShortcutRecorder.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48EEA55217C0602D001F9C70 /* PTHotKey.framework in Frameworks */,
+				48EEA55317C0602D001F9C70 /* ShortcutRecorder.framework in Frameworks */,
 				48B7378417B93BD9006161C0 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +101,8 @@
 		48B7378217B93BD9006161C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48EEA55017C0602D001F9C70 /* PTHotKey.framework */,
+				48EEA55117C0602D001F9C70 /* ShortcutRecorder.framework */,
 				48B7378317B93BD9006161C0 /* Cocoa.framework */,
 				48B7378517B93BD9006161C0 /* Other Frameworks */,
 			);
@@ -317,9 +325,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Mouse_Ninja-hjfsfytkcqgsozghecbtdxdcacso/Build/Products/Debug\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mouse Ninja/Mouse Ninja-Prefix.pch";
 				INFOPLIST_FILE = "Mouse Ninja/Mouse Ninja-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -329,9 +342,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/Mouse_Ninja-hjfsfytkcqgsozghecbtdxdcacso/Build/Products/Debug\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Mouse Ninja/Mouse Ninja-Prefix.pch";
 				INFOPLIST_FILE = "Mouse Ninja/Mouse Ninja-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
