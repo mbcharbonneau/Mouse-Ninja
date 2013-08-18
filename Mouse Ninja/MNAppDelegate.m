@@ -56,4 +56,15 @@
     [[MNPreferencesWindowController sharedPreferencesController] showWindow:self];
 }
 
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag;
+{
+    if ( flag == NO )
+    {
+        [[MNPreferencesWindowController sharedPreferencesController] showWindow:self];
+        return NO;
+    }
+
+    return YES;
+}
+
 @end

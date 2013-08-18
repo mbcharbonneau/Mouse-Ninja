@@ -132,7 +132,6 @@
 
         view.path = nil;
         [self close];
-
     });
 }
 
