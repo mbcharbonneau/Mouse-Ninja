@@ -114,17 +114,22 @@
 - (void)mouseViewShouldFinish:(MNMouseView *)view;
 {
     [NSApp hide:self];
-        
-    NSPoint location = NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( view.frame ) - CGRectGetMidY( self.centerRect ) );
-    CGEventRef mouseDown = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseDown, location, kCGMouseButtonLeft );
-    CGEventRef mouseUp = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseUp, location, kCGMouseButtonLeft );
-    CGEventPost( kCGHIDEventTap, mouseDown );
-    [NSThread sleepForTimeInterval:0.05];
-    CGEventPost( kCGHIDEventTap, mouseUp );
-    CFRelease( mouseDown );
-    CFRelease( mouseUp );
 
-    [self resetWindow:view];
+    double delayInSeconds = 0.1;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        NSPoint location = NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( view.frame ) - CGRectGetMidY( self.centerRect ) );
+        CGEventRef mouseDown = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseDown, location, kCGMouseButtonLeft );
+        CGEventRef mouseUp = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseUp, location, kCGMouseButtonLeft );
+        CGEventPost( kCGHIDEventTap, mouseDown );
+        [NSThread sleepForTimeInterval:0.05];
+        CGEventPost( kCGHIDEventTap, mouseUp );
+        CFRelease( mouseDown );
+        CFRelease( mouseUp );
+
+        [self resetWindow:view];
+    });
 }
 
 - (void)mouseViewShouldCancel:(MNMouseView *)view;
