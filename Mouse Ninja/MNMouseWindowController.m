@@ -14,6 +14,8 @@
 
 @property (nonatomic, assign) NSRect centerRect;
 
+- (void)resetWindow:(MNMouseView *)mouseView;
+
 @end
 
 @implementation MNMouseWindowController
@@ -36,6 +38,14 @@
     self.centerRect = [self.window frame];
     [super showWindow:sender];
     [self.window.contentView setNeedsDisplay:YES];
+}
+
+#pragma mark MNMouseWindowController Private
+
+- (void)resetWindow:(MNMouseView *)mouseView;
+{
+    mouseView.path = nil;
+    [self close];
 }
 
 #pragma mark NSObject
@@ -94,12 +104,32 @@
     [path appendBezierPathWithRect:NSMakeRect( 0.0f, CGRectGetMaxY( self.centerRect ), CGRectGetWidth( view.frame ), CGRectGetMaxY( view.frame ) )];
 
     view.path = path;
+
+    NSPoint location = NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( view.frame ) - CGRectGetMidY( self.centerRect ) );
+    CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, location, kCGMouseButtonLeft );
+    CGEventPost( kCGHIDEventTap, move );
+    CFRelease( move );
+}
+
+- (void)mouseViewShouldFinish:(MNMouseView *)view;
+{
+    [NSApp hide:self];
+        
+    NSPoint location = NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( view.frame ) - CGRectGetMidY( self.centerRect ) );
+    CGEventRef mouseDown = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseDown, location, kCGMouseButtonLeft );
+    CGEventRef mouseUp = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseUp, location, kCGMouseButtonLeft );
+    CGEventPost( kCGHIDEventTap, mouseDown );
+    [NSThread sleepForTimeInterval:0.05];
+    CGEventPost( kCGHIDEventTap, mouseUp );
+    CFRelease( mouseDown );
+    CFRelease( mouseUp );
+
+    [self resetWindow:view];
 }
 
 - (void)mouseViewShouldCancel:(MNMouseView *)view;
 {
-    view.path = nil;
-    [self close];
+    [self resetWindow:view];
 }
 
 @end

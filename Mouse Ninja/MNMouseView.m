@@ -67,6 +67,10 @@
         case 125:
             [self.delegate mouseView:self removeDirection:MNDirectionUp];
             break;
+        case 36:
+        case 49:
+            [self.delegate mouseViewShouldFinish:self];
+            break;
         default:
             [super keyDown:theEvent];
             break;

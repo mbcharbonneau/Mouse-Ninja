@@ -8,6 +8,7 @@
 
 #import "MNWelcomeWindowController.h"
 #import "MNConstants.h"
+#import "MNPreferencesWindowController.h"
 
 @interface MNWelcomeWindowController ()
 
@@ -19,10 +20,8 @@
 
 - (IBAction)openPreferences:(id)sender;
 {
-#warning stub
-
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:MNHasSeenWelcomeWindowDefaultsKey];
-
+    [[MNPreferencesWindowController sharedPreferencesController] showWindow:sender];
 }
 
 - (IBAction)learnMore:(id)sender;

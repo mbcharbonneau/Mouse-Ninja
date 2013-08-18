@@ -30,6 +30,7 @@ typedef NS_ENUM( NSUInteger, MNDirection )
 
 @required
 - (void)mouseView:(MNMouseView *)view removeDirection:(MNDirection)direction;
+- (void)mouseViewShouldFinish:(MNMouseView *)view;
 - (void)mouseViewShouldCancel:(MNMouseView *)view;
 
 @end
