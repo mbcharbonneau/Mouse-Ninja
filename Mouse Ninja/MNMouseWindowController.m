@@ -14,7 +14,7 @@
 
 @property (nonatomic, assign) NSRect centerRect;
 
-- (void)resetWindow:(MNMouseView *)mouseView;
+- (NSPoint)centerPoint;
 
 @end
 
@@ -38,14 +38,16 @@
     self.centerRect = [self.window frame];
     [super showWindow:sender];
     [self.window.contentView setNeedsDisplay:YES];
+    CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, [self centerPoint], kCGMouseButtonLeft );
+    CGEventPost( kCGHIDEventTap, move );
+    CFRelease( move );
 }
 
 #pragma mark MNMouseWindowController Private
 
-- (void)resetWindow:(MNMouseView *)mouseView;
+- (NSPoint)centerPoint;
 {
-    mouseView.path = nil;
-    [self close];
+    return NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( self.window.frame ) - CGRectGetMidY( self.centerRect ) );
 }
 
 #pragma mark NSObject
@@ -105,8 +107,7 @@
 
     view.path = path;
 
-    NSPoint location = NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( view.frame ) - CGRectGetMidY( self.centerRect ) );
-    CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, location, kCGMouseButtonLeft );
+    CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, [self centerPoint], kCGMouseButtonLeft );
     CGEventPost( kCGHIDEventTap, move );
     CFRelease( move );
 }
@@ -118,23 +119,25 @@
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        NSPoint location = NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( view.frame ) - CGRectGetMidY( self.centerRect ) );
-        CGEventRef mouseDown = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseDown, location, kCGMouseButtonLeft );
-        CGEventRef mouseUp = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseUp, location, kCGMouseButtonLeft );
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        CGEventRef mouseDown = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseDown, [self centerPoint], kCGMouseButtonLeft );
+        CGEventRef mouseUp = CGEventCreateMouseEvent( NULL, kCGEventLeftMouseUp, [self centerPoint], kCGMouseButtonLeft );
         CGEventPost( kCGHIDEventTap, mouseDown );
         [NSThread sleepForTimeInterval:0.05];
         CGEventPost( kCGHIDEventTap, mouseUp );
         CFRelease( mouseDown );
         CFRelease( mouseUp );
 
-        [self resetWindow:view];
+        view.path = nil;
+        [self close];
+
     });
 }
 
 - (void)mouseViewShouldCancel:(MNMouseView *)view;
 {
-    [self resetWindow:view];
+    view.path = nil;
+    [self close];
 }
 
 @end

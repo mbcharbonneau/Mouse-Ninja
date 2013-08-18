@@ -8,6 +8,7 @@
 
 #import "MNPreferencesWindowController.h"
 #import "MNMouseWindowController.h"
+#import "ShortcutRecorder.h"
 
 @interface MNPreferencesWindowController ()
 
@@ -49,6 +50,13 @@
     [super windowDidLoad];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+}
+
+#pragma mark SRRecorderControlDelegate
+
+- (void)shortcutRecorderDidEndRecording:(SRRecorderControl *)aRecorder;
+{
+    NSLog( @"HERE" );
 }
 
 @end
