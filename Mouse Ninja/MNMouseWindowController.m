@@ -79,22 +79,51 @@
     CGFloat y = CGRectGetMinY( self.centerRect );
     CGFloat width = CGRectGetWidth( self.centerRect );
     CGFloat height = CGRectGetHeight( self.centerRect );
+    CGFloat minBoxSize = 20.0f;
     
     switch ( direction )
     {
         case MNDirectionUp:
-            height -= CGRectGetMidY( self.centerRect )  - CGRectGetMinY( self.centerRect );
+            if ( height > minBoxSize )
+            {
+                height -= CGRectGetMidY( self.centerRect )  - CGRectGetMinY( self.centerRect );
+            }
+            else
+            {
+                y = MAX( y - 1, CGRectGetMinY( view.frame ) );
+            }
             break;
         case MNDirectionDown:
-            y += CGRectGetMidY( self.centerRect ) - CGRectGetMinY( self.centerRect );
-            height -= CGRectGetHeight( self.centerRect ) / 2.0f;
+            if ( height > minBoxSize )
+            {
+                y += CGRectGetMidY( self.centerRect ) - CGRectGetMinY( self.centerRect );
+                height -= CGRectGetHeight( self.centerRect ) / 2.0f;
+            }
+            else
+            {
+                y = MIN( y + 1, CGRectGetMaxY( view.frame ) );
+            }
             break;
         case MNDirectionRight:
-            width -= CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
+            if ( width > minBoxSize )
+            {
+                width -= CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
+            }
+            else
+            {
+                x = MAX( x - 1, CGRectGetMinX( view.frame ) );
+            }
             break;
         case MNDirectionLeft:
-            x += CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
-            width -= CGRectGetWidth( self.centerRect ) / 2.0f;
+            if ( width > minBoxSize )
+            {
+                x += CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
+                width -= CGRectGetWidth( self.centerRect ) / 2.0f;
+            }
+            else
+            {
+                x = MIN( x + 1, CGRectGetMaxX( view.frame ) );
+            }
             break;
     }
 

@@ -16,7 +16,7 @@
 {
     if ( self = [super initWithFrame:frame] )
     {
-        _color = [NSColor colorWithCalibratedWhite:0.1f alpha:0.7f];
+        _color = [NSColor colorWithCalibratedWhite:0.08f alpha:0.8f];
         _path = [[NSBezierPath alloc] init];
 
         [self addObserver:self forKeyPath:@"path" options:0 context:NULL];
