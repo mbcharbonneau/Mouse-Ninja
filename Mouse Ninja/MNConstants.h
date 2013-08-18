@@ -9,4 +9,5 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *MNHasSeenWelcomeWindowDefaultsKey;
+extern NSString *MNGlobalHotkeyInfoDefaultsKey;
 extern NSString *MNGlobalHotkeyIdentifier;

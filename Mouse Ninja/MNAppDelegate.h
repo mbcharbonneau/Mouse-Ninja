@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <ShortcutRecorder.h>
+#import <PTHotKey/PTHotKeyCenter.h>
 
 @interface MNAppDelegate : NSObject <NSApplicationDelegate>
 

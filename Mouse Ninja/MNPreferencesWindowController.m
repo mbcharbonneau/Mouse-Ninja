@@ -13,6 +13,8 @@
 
 @interface MNPreferencesWindowController ()
 
+@property (nonatomic, strong) IBOutlet SRRecorderControl *shortcutRecorder;
+
 @end
 
 @implementation MNPreferencesWindowController
@@ -30,6 +32,16 @@
     return sharedController;
 }
 
+#pragma mark NSWindowController
+
+- (void)windowDidLoad;
+{
+    [super windowDidLoad];
+
+    NSDictionary *keyInfo = [[NSUserDefaults standardUserDefaults] objectForKey:MNGlobalHotkeyInfoDefaultsKey];
+    [self.shortcutRecorder setObjectValue:keyInfo];
+}
+
 #pragma mark SRRecorderControlDelegate
 
 - (BOOL)shortcutRecorderShouldBeginRecording:(SRRecorderControl *)aRecorder;
@@ -40,9 +52,12 @@
 
 - (void)shortcutRecorderDidEndRecording:(SRRecorderControl *)aRecorder;
 {
-    PTHotKeyCenter *center = [PTHotKeyCenter sharedCenter];
-    PTHotKey *oldHotKey = [center hotKeyWithIdentifier:MNGlobalHotkeyIdentifier];
-    [center unregisterHotKey:oldHotKey];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    PTHotKeyCenter *hotkeyCenter = [PTHotKeyCenter sharedCenter];
+    PTHotKey *oldHotKey = [hotkeyCenter hotKeyWithIdentifier:MNGlobalHotkeyIdentifier];
+    
+    [hotkeyCenter unregisterHotKey:oldHotKey];
+    [userDefaults setObject:nil forKey:MNGlobalHotkeyInfoDefaultsKey];
 
     NSDictionary *keyInfo = [aRecorder objectValue];
 
@@ -50,10 +65,12 @@
     {
         MNMouseWindowController *target = [MNMouseWindowController sharedMouseWindowController];
         PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:MNGlobalHotkeyIdentifier keyCombo:keyInfo target:target action:@selector(showWindow:)];
-        [center registerHotKey:newHotKey];
+
+        [hotkeyCenter registerHotKey:newHotKey];
+        [userDefaults setObject:keyInfo forKey:MNGlobalHotkeyInfoDefaultsKey];
     }
 
-    [center resume];
+    [hotkeyCenter resume];
 }
 
 @end
