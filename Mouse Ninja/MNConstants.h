@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+// Global identifiers
+
 extern NSString *MNHasSeenWelcomeWindowDefaultsKey;
 extern NSString *MNGlobalHotkeyInfoDefaultsKey;
 extern NSString *MNGlobalHotkeyIdentifier;
+
+// Notification Names
+
+extern NSString *MNUserDidShowMouseWindowNotification;

@@ -52,8 +52,6 @@
 
         [hotkeyCenter registerHotKey:newHotKey];
     }
-
-    [[MNPreferencesWindowController sharedPreferencesController] showWindow:self];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag;
