@@ -151,7 +151,7 @@
             }
             else
             {
-                y = MIN( y + 1, CGRectGetMaxY( view.frame ) );
+                y = MIN( y + 1, CGRectGetMaxY( view.frame ) - MIN_BOX_SIZE / 2.0f );
             }
             break;
         case MNDirectionRight:
@@ -172,7 +172,7 @@
             }
             else
             {
-                x = MIN( x + 1, CGRectGetMaxX( view.frame ) );
+                x = MIN( x + 1, CGRectGetMaxX( view.frame ) - MIN_BOX_SIZE / 2.0f );
             }
             break;
     }
