@@ -11,3 +11,5 @@
 NSString *MNHasSeenWelcomeWindowDefaultsKey = @"MNHasSeenWelcomeWindowDefaultsKey";
 NSString *MNGlobalHotkeyInfoDefaultsKey = @"MNGlobalHotkeyInfoDefaultsKey";
 NSString *MNGlobalHotkeyIdentifier = @"MNGlobalHotkeyIdentifier";
+
+NSString *MNUserDidShowMouseWindowNotification = @"MNUserDidShowMouseWindowNotification";

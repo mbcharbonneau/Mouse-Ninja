@@ -37,6 +37,13 @@
     [stroke setLineWidth:strokeWidth];
     [stroke stroke];
 
+
+    [[NSColor greenColor] set];
+
+    for ( NSBezierPath *guide in self.guidePaths )
+        [guide stroke];
+
+
     [self.color set];
     [self.path fill];
 }
