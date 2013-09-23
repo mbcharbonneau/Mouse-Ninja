@@ -37,6 +37,17 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upm-kb-UPa">
+                        <rect key="frame" x="193" y="67" width="133" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Show Guide Lines" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="c50-de-gnx">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="ToT-3O-jb7" name="value" keyPath="values.MNEnableGuideLinesDefaultsKey" id="G7f-kv-VXR"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="10" firstAttribute="top" secondItem="2" secondAttribute="top" constant="69" id="19"/>
@@ -51,5 +62,6 @@
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="ToT-3O-jb7"/>
     </objects>
 </document>

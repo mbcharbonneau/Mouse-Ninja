@@ -9,6 +9,7 @@
 #import "MNMouseWindowController.h"
 #import "MNMouseWindow.h"
 #import "MNMouseView.h"
+#import "MNConstants.h"
 
 #define MIN_BOX_SIZE 20.0f
 
@@ -46,6 +47,9 @@
 
 - (NSArray *)createGuidesInsideRect:(NSRect)centerRect;
 {
+    if ( ![[NSUserDefaults standardUserDefaults] boolForKey:MNEnableGuideLinesDefaultsKey] )
+        return @[];
+
     NSMutableArray *guides = [[NSMutableArray alloc] initWithCapacity:4];
 
     CGFloat top = CGRectGetMinY( centerRect ) + CGRectGetHeight( centerRect ) / 4.0f;

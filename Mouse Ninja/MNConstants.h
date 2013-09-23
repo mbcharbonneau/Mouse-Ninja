@@ -12,6 +12,7 @@
 
 extern NSString *MNHasSeenWelcomeWindowDefaultsKey;
 extern NSString *MNGlobalHotkeyInfoDefaultsKey;
+extern NSString *MNEnableGuideLinesDefaultsKey;
 extern NSString *MNGlobalHotkeyIdentifier;
 
 // Notification Names
