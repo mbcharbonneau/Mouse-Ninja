@@ -10,6 +10,8 @@
 #import "MNMouseWindow.h"
 #import "MNMouseView.h"
 
+#define MIN_BOX_SIZE 20.0f
+
 @interface MNMouseWindowController ()
 
 @property (nonatomic, assign) NSRect centerRect;
@@ -44,28 +46,43 @@
 
 - (NSArray *)createGuidesInsideRect:(NSRect)centerRect;
 {
-    CGFloat left = CGRectGetMinX( centerRect ) + CGRectGetWidth( centerRect ) / 4.0f;
-    CGFloat right = CGRectGetMidX( centerRect ) + CGRectGetWidth( centerRect ) / 4.0f;
+    NSMutableArray *guides = [[NSMutableArray alloc] initWithCapacity:4];
+
     CGFloat top = CGRectGetMinY( centerRect ) + CGRectGetHeight( centerRect ) / 4.0f;
     CGFloat bottom = CGRectGetMidY( centerRect ) + CGRectGetHeight( centerRect ) / 4.0f;
 
-    NSBezierPath *leftGuide = [[NSBezierPath alloc] init];
-    [leftGuide moveToPoint:NSMakePoint( left, CGRectGetMinY( centerRect ) )];
-    [leftGuide lineToPoint:NSMakePoint( left, CGRectGetMaxY( centerRect ) )];
+    if ( CGRectGetWidth( centerRect ) >= MIN_BOX_SIZE * 2.0f )
+    {
+        CGFloat left = CGRectGetMinX( centerRect ) + CGRectGetWidth( centerRect ) / 4.0f;
+        CGFloat right = CGRectGetMidX( centerRect ) + CGRectGetWidth( centerRect ) / 4.0f;
 
-    NSBezierPath *rightGuide = [[NSBezierPath alloc] init];
-    [rightGuide moveToPoint:NSMakePoint( right, CGRectGetMinY( centerRect ) )];
-    [rightGuide lineToPoint:NSMakePoint( right, CGRectGetMaxY( centerRect ) )];
+        NSBezierPath *leftGuide = [[NSBezierPath alloc] init];
+        [leftGuide moveToPoint:NSMakePoint( left, CGRectGetMinY( centerRect ) )];
+        [leftGuide lineToPoint:NSMakePoint( left, CGRectGetMaxY( centerRect ) )];
 
-    NSBezierPath *topGuide = [[NSBezierPath alloc] init];
-    [topGuide moveToPoint:NSMakePoint( CGRectGetMinX( centerRect ), top )];
-    [topGuide lineToPoint:NSMakePoint( CGRectGetMaxX( centerRect ), top )];
+        NSBezierPath *rightGuide = [[NSBezierPath alloc] init];
+        [rightGuide moveToPoint:NSMakePoint( right, CGRectGetMinY( centerRect ) )];
+        [rightGuide lineToPoint:NSMakePoint( right, CGRectGetMaxY( centerRect ) )];
 
-    NSBezierPath *bottomGuide = [[NSBezierPath alloc] init];
-    [bottomGuide moveToPoint:NSMakePoint( CGRectGetMinX( centerRect ), bottom )];
-    [bottomGuide lineToPoint:NSMakePoint( CGRectGetMaxX( centerRect ), bottom )];
+        [guides addObject:leftGuide];
+        [guides addObject:rightGuide];
+    }
 
-    return @[leftGuide, rightGuide, topGuide, bottomGuide];
+    if ( CGRectGetHeight( centerRect ) >= MIN_BOX_SIZE * 2.0f )
+    {
+        NSBezierPath *topGuide = [[NSBezierPath alloc] init];
+        [topGuide moveToPoint:NSMakePoint( CGRectGetMinX( centerRect ), top )];
+        [topGuide lineToPoint:NSMakePoint( CGRectGetMaxX( centerRect ), top )];
+
+        NSBezierPath *bottomGuide = [[NSBezierPath alloc] init];
+        [bottomGuide moveToPoint:NSMakePoint( CGRectGetMinX( centerRect ), bottom )];
+        [bottomGuide lineToPoint:NSMakePoint( CGRectGetMaxX( centerRect ), bottom )];
+
+        [guides addObject:topGuide];
+        [guides addObject:bottomGuide];
+    }
+
+    return guides;
 }
 
 #pragma mark NSWindowController
@@ -109,12 +126,11 @@
     CGFloat y = CGRectGetMinY( self.centerRect );
     CGFloat width = CGRectGetWidth( self.centerRect );
     CGFloat height = CGRectGetHeight( self.centerRect );
-    CGFloat minBoxSize = 20.0f;
-    
+
     switch ( direction )
     {
         case MNDirectionUp:
-            if ( height > minBoxSize )
+            if ( height > MIN_BOX_SIZE )
             {
                 height -= CGRectGetMidY( self.centerRect )  - CGRectGetMinY( self.centerRect );
             }
@@ -124,7 +140,7 @@
             }
             break;
         case MNDirectionDown:
-            if ( height > minBoxSize )
+            if ( height > MIN_BOX_SIZE )
             {
                 y += CGRectGetMidY( self.centerRect ) - CGRectGetMinY( self.centerRect );
                 height -= CGRectGetHeight( self.centerRect ) / 2.0f;
@@ -135,7 +151,7 @@
             }
             break;
         case MNDirectionRight:
-            if ( width > minBoxSize )
+            if ( width > MIN_BOX_SIZE )
             {
                 width -= CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
             }
@@ -145,7 +161,7 @@
             }
             break;
         case MNDirectionLeft:
-            if ( width > minBoxSize )
+            if ( width > MIN_BOX_SIZE )
             {
                 x += CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
                 width -= CGRectGetWidth( self.centerRect ) / 2.0f;
