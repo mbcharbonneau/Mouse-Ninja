@@ -21,12 +21,22 @@
 
 @implementation MNAppDelegate
 
+#pragma mark MNAppDelegate
+
+- (IBAction)showPreferences:(id)sender;
+{
+    [[MNPreferencesWindowController sharedPreferencesController] showWindow:sender];
+}
+
 #pragma mark NSObject
 
 + (void)initialize;
 {
     NSDictionary *hotkey = @{ @"characters" : @"/", @"charactersIgnoringModifiers" : @"/", @"keyCode" : @(44), @"modifierFlags" : @(786432) };
-    NSDictionary *defaults = @{ MNHasSeenWelcomeWindowDefaultsKey : @(NO), MNEnableGuideLinesDefaultsKey : @(YES), MNGlobalHotkeyInfoDefaultsKey : hotkey };
+    NSDictionary *defaults = @{ MNHasSeenWelcomeWindowDefaultsKey : @(NO),
+                                MNEnableGuideLinesDefaultsKey : @(YES),
+                                MNGlobalHotkeyInfoDefaultsKey : hotkey,
+                                MNGuideLinesColorDefaultsKey : [NSArchiver archivedDataWithRootObject:[NSColor whiteColor]] };
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }

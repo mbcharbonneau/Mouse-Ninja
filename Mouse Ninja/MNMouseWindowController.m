@@ -86,6 +86,8 @@
         [guides addObject:bottomGuide];
     }
 
+    //[guides addObject:[NSBezierPath bezierPathWithRect:centerRect]];
+
     return guides;
 }
 

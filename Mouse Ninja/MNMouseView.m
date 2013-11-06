@@ -16,7 +16,8 @@
 {
     if ( self = [super initWithFrame:frame] )
     {
-        _color = [NSColor colorWithCalibratedWhite:0.08f alpha:0.8f];
+        _boxColor = [NSColor colorWithCalibratedWhite:0.08f alpha:0.8f];
+        _guideColor = [NSColor redColor];
         _path = [[NSBezierPath alloc] init];
 
         [self addObserver:self forKeyPath:@"path" options:0 context:NULL];
@@ -28,23 +29,45 @@
 
 - (void)drawRect:(NSRect)dirtyRect;
 {
-    NSAssert( self.color != nil, @"cannot draw with nil color" );
+    NSAssert( self.boxColor != nil, @"cannot draw with nil color" );
+    NSAssert( self.guideColor != nil, @"cannot draw with nil color" );
 
     CGFloat strokeWidth = 4.0f;
     NSBezierPath *stroke = [NSBezierPath bezierPathWithRect:NSInsetRect( self.bounds, strokeWidth / 2.0f, strokeWidth / 2.0f )];
 
-    [[NSColor redColor] set];
+    [[NSColor blueColor] set];
     [stroke setLineWidth:strokeWidth];
     [stroke stroke];
 
-
-    [[NSColor greenColor] set];
+    NSBezierPath *test = [[NSBezierPath alloc] init];
 
     for ( NSBezierPath *guide in self.guidePaths )
-        [guide stroke];
+    {
+        [test appendBezierPath:guide];
+    }
+
+    [_boxColor set];
+
+    [test setLineWidth:3.0f];
+    [test stroke];
+
+    [[NSColor whiteColor] set];
+    CGFloat lineDash[2];
+
+    lineDash[0] = 20.0;
+    lineDash[1] = 2.0;
+
+    [test setLineJoinStyle:NSMiterLineJoinStyle];
+
+    [test setLineDash:lineDash count:2 phase:0.0];
+    [test setLineWidth:1.0f];
+    [test stroke];
 
 
-    [self.color set];
+
+
+
+    [self.boxColor set];
     [self.path fill];
 }
 

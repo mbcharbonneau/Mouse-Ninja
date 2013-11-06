@@ -21,26 +21,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="10" customClass="SRRecorderControl">
-                        <rect key="frame" x="195" y="106" width="193" height="25"/>
+                    <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="10" customClass="SRRecorderControl">
+                        <rect key="frame" x="188" y="143" width="193" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <connections>
                             <outlet property="delegate" destination="-2" id="32"/>
                         </connections>
                     </customView>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="20">
-                        <rect key="frame" x="58" y="110" width="121" height="17"/>
+                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="20">
+                        <rect key="frame" x="58" y="147" width="125" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Keyboard Shortcut" id="21">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Keyboard Shortcut:" id="21">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upm-kb-UPa">
-                        <rect key="frame" x="193" y="67" width="133" height="18"/>
+                    <button ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="upm-kb-UPa">
+                        <rect key="frame" x="186" y="107" width="128" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Show Guide Lines" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="c50-de-gnx">
+                        <buttonCell key="cell" type="check" title="Show guide lines" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="c50-de-gnx">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -48,6 +48,20 @@
                             <binding destination="ToT-3O-jb7" name="value" keyPath="values.MNEnableGuideLinesDefaultsKey" id="G7f-kv-VXR"/>
                         </connections>
                     </button>
+                    <colorWell ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4SE-iG-L8h">
+                        <rect key="frame" x="208" y="78" width="44" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="color" red="0.05813049898" green="0.055541899059999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </colorWell>
+                    <textField verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1WW-DU-cr5">
+                        <rect key="frame" x="257" y="81" width="77" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Guide color" id="Yr8-RT-B9M">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="10" firstAttribute="top" secondItem="2" secondAttribute="top" constant="69" id="19"/>
@@ -56,6 +70,10 @@
                     <constraint firstItem="20" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="61" id="27"/>
                     <constraint firstItem="10" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="195" id="29"/>
                     <constraint firstAttribute="trailing" secondItem="10" secondAttribute="trailing" constant="92" id="31"/>
+                    <constraint firstItem="4SE-iG-L8h" firstAttribute="centerY" secondItem="1WW-DU-cr5" secondAttribute="centerY" id="Qrg-r6-BPz"/>
+                    <constraint firstItem="4SE-iG-L8h" firstAttribute="top" secondItem="upm-kb-UPa" secondAttribute="bottom" constant="8" id="ROR-OB-wve"/>
+                    <constraint firstItem="upm-kb-UPa" firstAttribute="top" secondItem="10" secondAttribute="bottom" constant="20" id="oBI-2n-nZb"/>
+                    <constraint firstItem="1WW-DU-cr5" firstAttribute="leading" secondItem="4SE-iG-L8h" secondAttribute="trailing" constant="8" id="uSh-41-vZv"/>
                 </constraints>
             </view>
             <connections>
