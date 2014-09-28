@@ -61,8 +61,7 @@
 
     NSDictionary *keyInfo = [aRecorder objectValue];
 
-    if ( keyInfo != nil )
-    {
+    if ( keyInfo != nil ) {
         MNMouseWindowController *target = [MNMouseWindowController sharedMouseWindowController];
         PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:MNGlobalHotkeyIdentifier keyCombo:keyInfo target:target action:@selector(showWindow:)];
 

@@ -14,10 +14,9 @@
 
 - (id)initWithFrame:(NSRect)frame;
 {
-    if ( self = [super initWithFrame:frame] )
-    {
+    if ( self = [super initWithFrame:frame] ) {
         _boxColor = [NSColor colorWithCalibratedWhite:0.08f alpha:0.8f];
-        _guideColor = [NSColor redColor];
+        _guideColor = [NSColor blueColor];
         _path = [[NSBezierPath alloc] init];
 
         [self addObserver:self forKeyPath:@"path" options:0 context:NULL];
@@ -39,33 +38,18 @@
     [stroke setLineWidth:strokeWidth];
     [stroke stroke];
 
-    NSBezierPath *test = [[NSBezierPath alloc] init];
+    NSBezierPath *guidesPath = [[NSBezierPath alloc] init];
 
     for ( NSBezierPath *guide in self.guidePaths )
     {
-        [test appendBezierPath:guide];
+        [guidesPath appendBezierPath:guide];
     }
 
-    [_boxColor set];
-
-    [test setLineWidth:3.0f];
-    [test stroke];
-
     [[NSColor whiteColor] set];
-    CGFloat lineDash[2];
-
-    lineDash[0] = 20.0;
-    lineDash[1] = 2.0;
-
-    [test setLineJoinStyle:NSMiterLineJoinStyle];
-
-    [test setLineDash:lineDash count:2 phase:0.0];
-    [test setLineWidth:1.0f];
-    [test stroke];
-
-
-
-
+    [guidesPath setLineWidth:4.0f];
+    [guidesPath stroke];
+    [self.guideColor set];
+    [guidesPath fill];
 
     [self.boxColor set];
     [self.path fill];
@@ -80,8 +64,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent;
 {
-    switch ( [theEvent keyCode] )
-    {
+    switch ( [theEvent keyCode] ) {
         case 53:
             [self.delegate mouseViewShouldCancel:self];
             break;

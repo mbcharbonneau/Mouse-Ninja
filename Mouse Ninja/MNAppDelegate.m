@@ -48,14 +48,12 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *hotkeyInfo = [userDefaults objectForKey:MNGlobalHotkeyInfoDefaultsKey];
 
-    if ( ![userDefaults boolForKey:MNHasSeenWelcomeWindowDefaultsKey] )
-    {
+    if ( ![userDefaults boolForKey:MNHasSeenWelcomeWindowDefaultsKey] ) {
         self.welcomeWindowController = [[MNWelcomeWindowController alloc] initWithWindowNibName:@"WelcomeWindow"];
         [self.welcomeWindowController showWindow:self];
     }
 
-    if ( hotkeyInfo != nil )
-    {
+    if ( hotkeyInfo != nil ) {
         PTHotKeyCenter *hotkeyCenter = [PTHotKeyCenter sharedCenter];
         MNMouseWindowController *target = [MNMouseWindowController sharedMouseWindowController];
         PTHotKey *newHotKey = [PTHotKey hotKeyWithIdentifier:MNGlobalHotkeyIdentifier keyCombo:hotkeyInfo target:target action:@selector(showWindow:)];
@@ -66,8 +64,7 @@
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)theApplication hasVisibleWindows:(BOOL)flag;
 {
-    if ( flag == NO )
-    {
+    if ( flag == NO ) {
         [[MNPreferencesWindowController sharedPreferencesController] showWindow:self];
         return NO;
     }

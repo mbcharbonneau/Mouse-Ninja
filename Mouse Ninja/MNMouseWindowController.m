@@ -51,42 +51,39 @@
         return @[];
 
     NSMutableArray *guides = [[NSMutableArray alloc] initWithCapacity:4];
-
-    CGFloat top = CGRectGetMinY( centerRect ) + CGRectGetHeight( centerRect ) / 4.0f;
-    CGFloat bottom = CGRectGetMidY( centerRect ) + CGRectGetHeight( centerRect ) / 4.0f;
-
-    if ( CGRectGetWidth( centerRect ) >= MIN_BOX_SIZE * 2.0f )
-    {
+    CGFloat radius = 6.0f;
+    
+    if ( CGRectGetWidth( centerRect ) >= MIN_BOX_SIZE * 2.0f ) {
+        
+        CGFloat y =  CGRectGetMinY( centerRect ) + CGRectGetHeight( centerRect ) / 2.0f;
         CGFloat left = CGRectGetMinX( centerRect ) + CGRectGetWidth( centerRect ) / 4.0f;
         CGFloat right = CGRectGetMidX( centerRect ) + CGRectGetWidth( centerRect ) / 4.0f;
-
-        NSBezierPath *leftGuide = [[NSBezierPath alloc] init];
-        [leftGuide moveToPoint:NSMakePoint( left, CGRectGetMinY( centerRect ) )];
-        [leftGuide lineToPoint:NSMakePoint( left, CGRectGetMaxY( centerRect ) )];
-
-        NSBezierPath *rightGuide = [[NSBezierPath alloc] init];
-        [rightGuide moveToPoint:NSMakePoint( right, CGRectGetMinY( centerRect ) )];
-        [rightGuide lineToPoint:NSMakePoint( right, CGRectGetMaxY( centerRect ) )];
+        
+        NSRect frameLeft = NSMakeRect( left - radius, y - radius, radius * 2.0f, radius * 2.0f );
+        NSBezierPath *leftGuide = [NSBezierPath bezierPathWithRoundedRect:frameLeft xRadius:radius yRadius:radius];
+        
+        NSRect frameRight = NSMakeRect( right - radius, y - radius, radius * 2.0f, radius * 2.0f );
+        NSBezierPath *rightGuide = [NSBezierPath bezierPathWithRoundedRect:frameRight xRadius:radius yRadius:radius];
 
         [guides addObject:leftGuide];
         [guides addObject:rightGuide];
     }
 
-    if ( CGRectGetHeight( centerRect ) >= MIN_BOX_SIZE * 2.0f )
-    {
-        NSBezierPath *topGuide = [[NSBezierPath alloc] init];
-        [topGuide moveToPoint:NSMakePoint( CGRectGetMinX( centerRect ), top )];
-        [topGuide lineToPoint:NSMakePoint( CGRectGetMaxX( centerRect ), top )];
+    if ( CGRectGetHeight( centerRect ) >= MIN_BOX_SIZE * 2.0f ) {
+        
+        CGFloat x = CGRectGetMinX( centerRect ) + CGRectGetWidth( centerRect ) / 2.0f;
+        CGFloat top = CGRectGetMaxY( centerRect ) - CGRectGetHeight( centerRect ) / 4.0f;
+        CGFloat bottom =  CGRectGetMinY( centerRect ) + CGRectGetHeight( centerRect ) / 4.0f;
 
-        NSBezierPath *bottomGuide = [[NSBezierPath alloc] init];
-        [bottomGuide moveToPoint:NSMakePoint( CGRectGetMinX( centerRect ), bottom )];
-        [bottomGuide lineToPoint:NSMakePoint( CGRectGetMaxX( centerRect ), bottom )];
-
+        NSRect frameTop = NSMakeRect( x - radius, top - radius, radius * 2.0f, radius * 2.0f );
+        NSBezierPath *topGuide = [NSBezierPath bezierPathWithRoundedRect:frameTop xRadius:radius yRadius:radius];
+        
+        NSRect frameBottom = NSMakeRect( x - radius, bottom - radius, radius * 2.0f, radius * 2.0f );
+        NSBezierPath *bottomGuide = [NSBezierPath bezierPathWithRoundedRect:frameBottom xRadius:radius yRadius:radius];
+        
         [guides addObject:topGuide];
         [guides addObject:bottomGuide];
     }
-
-    //[guides addObject:[NSBezierPath bezierPathWithRect:centerRect]];
 
     return guides;
 }
@@ -133,47 +130,35 @@
     CGFloat width = CGRectGetWidth( self.centerRect );
     CGFloat height = CGRectGetHeight( self.centerRect );
 
-    switch ( direction )
-    {
+    switch ( direction ) {
+            
         case MNDirectionUp:
-            if ( height > MIN_BOX_SIZE )
-            {
+            if ( height > MIN_BOX_SIZE ) {
                 height -= CGRectGetMidY( self.centerRect )  - CGRectGetMinY( self.centerRect );
-            }
-            else
-            {
+            } else {
                 y = MAX( y - 1, CGRectGetMinY( view.frame ) );
             }
             break;
         case MNDirectionDown:
-            if ( height > MIN_BOX_SIZE )
-            {
+            if ( height > MIN_BOX_SIZE ) {
                 y += CGRectGetMidY( self.centerRect ) - CGRectGetMinY( self.centerRect );
                 height -= CGRectGetHeight( self.centerRect ) / 2.0f;
-            }
-            else
-            {
+            } else {
                 y = MIN( y + 1, CGRectGetMaxY( view.frame ) - MIN_BOX_SIZE / 2.0f );
             }
             break;
         case MNDirectionRight:
-            if ( width > MIN_BOX_SIZE )
-            {
+            if ( width > MIN_BOX_SIZE ) {
                 width -= CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
-            }
-            else
-            {
+            } else {
                 x = MAX( x - 1, CGRectGetMinX( view.frame ) );
             }
             break;
         case MNDirectionLeft:
-            if ( width > MIN_BOX_SIZE )
-            {
+            if ( width > MIN_BOX_SIZE ) {
                 x += CGRectGetMidX( self.centerRect ) - CGRectGetMinX( self.centerRect );
                 width -= CGRectGetWidth( self.centerRect ) / 2.0f;
-            }
-            else
-            {
+            } else {
                 x = MIN( x + 1, CGRectGetMaxX( view.frame ) - MIN_BOX_SIZE / 2.0f );
             }
             break;
