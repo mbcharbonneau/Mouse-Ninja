@@ -15,12 +15,14 @@
 - (id)initWithFrame:(NSRect)frame;
 {
     if ( self = [super initWithFrame:frame] ) {
+        
         _boxColor = [NSColor colorWithCalibratedWhite:0.08f alpha:0.8f];
         _guideColor = [NSColor blueColor];
-        _path = [[NSBezierPath alloc] init];
 
-        [self addObserver:self forKeyPath:@"path" options:0 context:NULL];
-        [self addObserver:self forKeyPath:@"color" options:0 context:NULL];
+        [self addObserver:self forKeyPath:@"boxPath" options:0 context:NULL];
+        [self addObserver:self forKeyPath:@"guidesPath" options:0 context:NULL];
+        [self addObserver:self forKeyPath:@"boxColor" options:0 context:NULL];
+        [self addObserver:self forKeyPath:@"guideColor" options:0 context:NULL];
     }
     
     return self;
@@ -30,29 +32,15 @@
 {
     NSAssert( self.boxColor != nil, @"cannot draw with nil color" );
     NSAssert( self.guideColor != nil, @"cannot draw with nil color" );
-
-    CGFloat strokeWidth = 4.0f;
-    NSBezierPath *stroke = [NSBezierPath bezierPathWithRect:NSInsetRect( self.bounds, strokeWidth / 2.0f, strokeWidth / 2.0f )];
-
-    [[NSColor blueColor] set];
-    [stroke setLineWidth:strokeWidth];
-    [stroke stroke];
-
-    NSBezierPath *guidesPath = [[NSBezierPath alloc] init];
-
-    for ( NSBezierPath *guide in self.guidePaths )
-    {
-        [guidesPath appendBezierPath:guide];
-    }
-
+    
     [[NSColor whiteColor] set];
-    [guidesPath setLineWidth:4.0f];
-    [guidesPath stroke];
+    [self.guidesPath setLineWidth:4.0f];
+    [self.guidesPath stroke];
     [self.guideColor set];
-    [guidesPath fill];
+    [self.guidesPath fill];
 
     [self.boxColor set];
-    [self.path fill];
+    [self.boxPath fill];
 }
 
 - (BOOL)isOpaque;
@@ -104,8 +92,10 @@
 
 - (void)dealloc;
 {
-    [self removeObserver:self forKeyPath:@"path"];
-    [self removeObserver:self forKeyPath:@"color"];
+    [self removeObserver:self forKeyPath:@"boxPath"];
+    [self removeObserver:self forKeyPath:@"guidesPath"];
+    [self removeObserver:self forKeyPath:@"boxColor"];
+    [self removeObserver:self forKeyPath:@"guideColor"];
 }
 
 @end

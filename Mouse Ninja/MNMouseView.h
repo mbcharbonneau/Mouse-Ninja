@@ -22,8 +22,8 @@ typedef NS_ENUM( NSUInteger, MNDirection )
 
 @property (nonatomic, strong) NSColor *guideColor;
 @property (nonatomic, strong) NSColor *boxColor;
-@property (nonatomic, strong) NSBezierPath *path;
-@property (nonatomic, strong) NSArray *guidePaths;
+@property (nonatomic, strong) NSBezierPath *boxPath;
+@property (nonatomic, strong) NSBezierPath *guidesPath;
 @property (nonatomic, weak) id<MNMouseViewDelegate> delegate;
 
 @end

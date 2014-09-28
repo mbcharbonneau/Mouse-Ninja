@@ -20,7 +20,7 @@
 @property (nonatomic, strong) MNMouseView *mouseView;
 
 - (NSPoint)centerPoint;
-- (NSArray *)createGuidesInsideRect:(NSRect)centerRect;
+- (NSBezierPath *)createGuidesInsideRect:(NSRect)centerRect;
 
 @end
 
@@ -46,12 +46,12 @@
     return NSMakePoint( CGRectGetMidX( self.centerRect ), CGRectGetHeight( self.window.frame ) - CGRectGetMidY( self.centerRect ) );
 }
 
-- (NSArray *)createGuidesInsideRect:(NSRect)centerRect;
+- (NSBezierPath *)createGuidesInsideRect:(NSRect)centerRect;
 {
     if ( ![[NSUserDefaults standardUserDefaults] boolForKey:MNEnableGuideLinesDefaultsKey] )
-        return @[];
+        return nil;
 
-    NSMutableArray *guides = [[NSMutableArray alloc] initWithCapacity:4];
+    NSBezierPath *path = [[NSBezierPath alloc] init];
     CGFloat radius = 6.0f;
     
     if ( CGRectGetWidth( centerRect ) >= MIN_BOX_SIZE * 2.0f ) {
@@ -66,8 +66,8 @@
         NSRect frameRight = NSMakeRect( right - radius, y - radius, radius * 2.0f, radius * 2.0f );
         NSBezierPath *rightGuide = [NSBezierPath bezierPathWithRoundedRect:frameRight xRadius:radius yRadius:radius];
 
-        [guides addObject:leftGuide];
-        [guides addObject:rightGuide];
+        [path appendBezierPath:leftGuide];
+        [path appendBezierPath:rightGuide];
     }
 
     if ( CGRectGetHeight( centerRect ) >= MIN_BOX_SIZE * 2.0f ) {
@@ -82,11 +82,11 @@
         NSRect frameBottom = NSMakeRect( x - radius, bottom - radius, radius * 2.0f, radius * 2.0f );
         NSBezierPath *bottomGuide = [NSBezierPath bezierPathWithRoundedRect:frameBottom xRadius:radius yRadius:radius];
         
-        [guides addObject:topGuide];
-        [guides addObject:bottomGuide];
+        [path appendBezierPath:topGuide];
+        [path appendBezierPath:bottomGuide];
     }
-
-    return guides;
+    
+    return path;
 }
 
 #pragma mark NSWindowController
@@ -118,7 +118,7 @@
 {
     self.oldMouseLocation = [NSEvent mouseLocation];
     self.centerRect = [self.window frame];
-    self.mouseView.guidePaths = [self createGuidesInsideRect:self.centerRect];
+    self.mouseView.guidesPath = [self createGuidesInsideRect:self.centerRect];
     [super showWindow:sender];
     [NSApp activateIgnoringOtherApps:YES];
     CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, [self centerPoint], kCGMouseButtonLeft );
@@ -130,8 +130,8 @@
 
 - (void)windowDidResignMain:(NSNotification *)notification;
 {
-    self.mouseView.path = nil;
-    self.mouseView.guidePaths = nil;
+    self.mouseView.boxPath = nil;
+    self.mouseView.guidesPath = nil;
     
     [self close];
 }
@@ -188,8 +188,8 @@
     [path appendBezierPathWithRect:NSMakeRect( 0.0f, 0.0f, CGRectGetWidth( view.frame ), CGRectGetMinY( self.centerRect ) )];
     [path appendBezierPathWithRect:NSMakeRect( 0.0f, CGRectGetMaxY( self.centerRect ), CGRectGetWidth( view.frame ), CGRectGetMaxY( view.frame ) )];
 
-    view.path = path;
-    view.guidePaths = [self createGuidesInsideRect:self.centerRect];
+    view.boxPath = path;
+    view.guidesPath = [self createGuidesInsideRect:self.centerRect];
 
     CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, [self centerPoint], kCGMouseButtonLeft );
     CGEventPost( kCGHIDEventTap, move );
@@ -212,8 +212,8 @@
         CFRelease( mouseDown );
         CFRelease( mouseUp );
 
-        view.path = nil;
-        view.guidePaths = nil;
+        view.boxPath = nil;
+        view.guidesPath = nil;
 
         [self close];
     });
@@ -226,8 +226,8 @@
     CGEventPost( kCGHIDEventTap, move );
     CFRelease( move );
 
-    view.path = nil;
-    view.guidePaths = nil;
+    view.boxPath = nil;
+    view.guidesPath = nil;
 
     [self close];
 }
