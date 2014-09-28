@@ -11,12 +11,13 @@
 #import "MNMouseView.h"
 #import "MNConstants.h"
 
-#define MIN_BOX_SIZE 20.0f
+#define MIN_BOX_SIZE 30.0f
 
-@interface MNMouseWindowController ()
+@interface MNMouseWindowController () <NSWindowDelegate>
 
 @property (nonatomic, assign) NSRect centerRect;
 @property (nonatomic, assign) NSPoint oldMouseLocation;
+@property (nonatomic, strong) MNMouseView *mouseView;
 
 - (NSPoint)centerPoint;
 - (NSArray *)createGuidesInsideRect:(NSRect)centerRect;
@@ -90,11 +91,34 @@
 
 #pragma mark NSWindowController
 
+- (instancetype)initWithWindow:(NSWindow *)window;
+{
+    NSRect frame = [[NSScreen mainScreen] frame];
+    MNMouseWindow *mouseWindow = [[MNMouseWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
+
+    [mouseWindow setBackgroundColor:[NSColor clearColor]];
+    [mouseWindow setOpaque:NO];
+    [mouseWindow setLevel:CGShieldingWindowLevel()];
+    
+    if ( self = [super initWithWindow:mouseWindow] ) {
+
+        self.mouseView = [[MNMouseView alloc] initWithFrame:frame];
+
+        [mouseWindow setContentView:self.mouseView];
+        [mouseWindow setInitialFirstResponder:self.mouseView];
+
+        mouseWindow.delegate = self;
+        self.mouseView.delegate = self;
+    }
+
+    return self;
+}
+
 - (IBAction)showWindow:(id)sender;
 {
     self.oldMouseLocation = [NSEvent mouseLocation];
     self.centerRect = [self.window frame];
-    ((MNMouseView *)self.window.contentView).guidePaths = [self createGuidesInsideRect:self.centerRect];
+    self.mouseView.guidePaths = [self createGuidesInsideRect:self.centerRect];
     [super showWindow:sender];
     [NSApp activateIgnoringOtherApps:YES];
     CGEventRef move = CGEventCreateMouseEvent( NULL, kCGEventMouseMoved, [self centerPoint], kCGMouseButtonLeft );
@@ -102,23 +126,14 @@
     CFRelease( move );
 }
 
-#pragma mark NSObject
+#pragma mark NSWindowDelegate
 
-- (id)init;
+- (void)windowDidResignMain:(NSNotification *)notification;
 {
-    NSRect frame = [[NSScreen mainScreen] frame];
-    MNMouseWindow *mouseWindow = [[MNMouseWindow alloc] initWithContentRect:frame styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES];
-    MNMouseView *mouseView = [[MNMouseView alloc] initWithFrame:frame];
-
-    mouseView.delegate = self;
-
-    [mouseWindow setBackgroundColor:[NSColor clearColor]];
-    [mouseWindow setOpaque:NO];
-    [mouseWindow setContentView:mouseView];
-    [mouseWindow setInitialFirstResponder:mouseView];
-    [mouseWindow setLevel:CGShieldingWindowLevel()];
-
-    return [self initWithWindow:mouseWindow];
+    self.mouseView.path = nil;
+    self.mouseView.guidePaths = nil;
+    
+    [self close];
 }
 
 #pragma mark MNMouseViewDelegate

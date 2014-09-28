@@ -11,6 +11,8 @@
 
 @interface MNMouseWindowController : NSWindowController <MNMouseViewDelegate>
 
+@property (readonly, nonatomic) MNMouseView *mouseView;
+
 + (instancetype)sharedMouseWindowController;
 
 @end
